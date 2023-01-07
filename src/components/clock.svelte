@@ -1,14 +1,14 @@
 <script lang="ts">
-  import dayjs from 'dayjs';
+	import dayjs from 'dayjs';
 
-  let time = Date.now();
-  setInterval(() => {
-    time = Date.now()
-  }, 1000)
+	let time = Date.now();
+	setInterval(() => {
+		time = Date.now();
+	}, 1000);
 
-  $: formattedTime = dayjs(time).format('hh:mm:ss A')
+	$: formattedTime = dayjs(time).format('hh:mm:ss A');
 </script>
 
-<section class="text-2xl rounded-2xl bg-zinc-700 p-8 text-center">
-  {formattedTime}
+<section class="rounded-2xl bg-black p-8 text-center text-2xl">
+	{formattedTime}
 </section>
