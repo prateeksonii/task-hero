@@ -22,10 +22,6 @@
 	const toggleEdit = () => {
 		isEditMode = !isEditMode;
 	};
-
-	const handleKeyDown = (event: KeyboardEvent) => {
-		console.log(event.key);
-	};
 </script>
 
 <section class="relative flex-1 rounded-2xl bg-zinc-700 p-8">
@@ -39,10 +35,7 @@
 			<p>
 				{note}
 			</p>
-			<button
-				on:click={toggleEdit}
-				on:keydown={handleKeyDown}
-				class="absolute top-3 right-3 text-emerald-400"
+			<button on:click={toggleEdit} class="absolute top-3 right-3 text-emerald-400"
 				>{@html feathers.icons.edit.toSvg({
 					height: 16,
 					width: 16
