@@ -28,7 +28,7 @@
 	};
 </script>
 
-<section class="relative rounded-2xl bg-zinc-700 p-8">
+<section class="relative flex-1 rounded-2xl bg-zinc-700 p-8">
 	{#if !isEditMode}
 		{#if isLoading}
 			<span>Loading...</span>
