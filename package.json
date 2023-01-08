@@ -36,6 +36,7 @@
 	"type": "module",
 	"dependencies": {
 		"dayjs": "^1.11.7",
-		"feather-icons": "^4.29.0"
+		"feather-icons": "^4.29.0",
+		"zod": "^3.20.2"
 	}
 }
