@@ -2,20 +2,25 @@
 	import { z } from 'zod';
 	import { enhance } from '$app/forms';
 	import feathers from 'feather-icons';
-	import type { ActionData } from '../routes/$types';
+	import type { IBookmark } from 'src/types/IBookmark';
 
 	const bookmarkValidator = z.object({
 		url: z.string().url()
 	});
 
-	const bookmarks = [];
 	let isModalOpen = false;
 	let url = '';
 	let bookmarkInput: HTMLInputElement;
 	let bookmarkForm: HTMLFormElement;
 	let errorMessage = '';
 
-	export let form: ActionData;
+	export let bookmarks: IBookmark[];
+
+	$: console.log(bookmarks);
+
+	$: if (!bookmarks) {
+		bookmarks = [];
+	}
 
 	const toggleModal = () => {
 		isModalOpen = !isModalOpen;
@@ -33,9 +38,16 @@
 		}
 	};
 
+	// $: console.log(form?.color, form?.title);
+
 	if (typeof window !== 'undefined') {
 		document.addEventListener('keydown', escEventListener);
 	}
+
+	const handleDelete = (index: number) => {
+		bookmarks = bookmarks.filter((_, i) => i !== index);
+		localStorage.setItem('taskhero_bookmarks', JSON.stringify(bookmarks));
+	};
 </script>
 
 <div class="absolute -left-7 bottom-7">
@@ -109,5 +121,21 @@
 {#if bookmarks.length === 0}
 	<div class="grid flex-1 place-items-center">No bookmarks</div>
 {:else}
-	<ul>nice</ul>
+	<ul class="flex flex-col gap-3">
+		{#each bookmarks as bookmark, i}
+			<li
+				class="flex items-center justify-between rounded-lg p-5 text-lg brightness-75"
+				style="background-color: {bookmark.color}"
+			>
+				<span class="brightness-100">{bookmark.title}</span><button
+					class="rounded-full p-2 hover:bg-red-500"
+					on:click={() => handleDelete(i)}
+					>{@html feathers.icons.trash.toSvg({
+						height: 20,
+						width: 20
+					})}</button
+				>
+			</li>
+		{/each}
+	</ul>
 {/if}
